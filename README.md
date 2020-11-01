@@ -1,2 +1,3 @@
 # Advent_of_Code
-AOC Code challenge solutions
+Code challenge solutions for AOC 2019
+https://adventofcode.com/2019
