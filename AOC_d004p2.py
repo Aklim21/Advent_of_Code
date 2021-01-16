@@ -37,19 +37,21 @@ Note:
 
 from itertools import tee, islice, chain
 
-def gen_pair(password):
-    p, i, n = tee(password, 3)
-    p = chain([None], p)
-    n = chain(islice(n, 1, None), [None]) 
-    return zip(p, i, n)  
+#Used itertools package here to run simultaneous iterations so we can compare iterated values more efficiently.
+#input password, output the current and next values in the string.
 
-#Changes are required here
+def gen_pair(password):
+    i, n = tee(password, 2)
+    n = chain(islice(n, 1, None), [None]) 
+    return zip(i, n)  
+
+#Changes to part 1 required here.  
+#Just needed to add a count to ensure the string does not contain more than two of the particular digit.
 
 def check_valid (password):
-    for p, i, n in gen_pair(password):
-        if (i == p and i != n):
-            if (password.count(i) < 3):
-                return True
+    for i, n in gen_pair(password):
+        if (i == n and password.count(i)<3):
+            return True
     return False
 
 
